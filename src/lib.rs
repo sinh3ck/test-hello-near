@@ -16,7 +16,7 @@ fn ft_metadata_default() -> FungibleTokenMetadata {
     }
 }
 
-fn ft_metadata_init_lazy_container() -> LazyOption<FungibleTokenMetadata> {
+fn ft_metadata_init() -> LazyOption<FungibleTokenMetadata> {
     let metadata: LazyOption<FungibleTokenMetadata>;
     metadata = LazyOption::new(b"neart".to_vec(), None);
     return metadata;
@@ -53,12 +53,12 @@ impl Contract {
 
     pub fn ft_metadata_set(&self, data: FungibleTokenMetadata) {
         //self.assert_owner_calling();
-        let mut metadata = ft_metadata_init_lazy_container();
+        let mut metadata = ft_metadata_init();
         metadata.set(&data); //save into storage
     }
 
     pub fn ft_metadata(&self) -> FungibleTokenMetadata {
-        let metadata = ft_metadata_init_lazy_container();
+        let metadata = ft_metadata_init();
         //load from storage or return default
         return metadata.get().unwrap_or(ft_metadata_default());
     }

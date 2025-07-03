@@ -1,3 +1,13 @@
+##
+
+Simple NEAR hello world project with new functions and tests included:
+- ft_metadata_default
+- ft_metadata_init
+- ft_metadata_set
+- ft_metadata
+- set_metadata_set (unit test)
+- test_set_metadata (integration test)
+
 # hello-near
 
 cargo-near-new-project-description
