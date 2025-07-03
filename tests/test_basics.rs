@@ -1,4 +1,6 @@
 use serde_json::json;
+use near_contract_standards::fungible_token::{
+    metadata::{FungibleTokenMetadata}};
 
 #[tokio::test]
 async fn test_contract_is_operational() -> Result<(), Box<dyn std::error::Error>> {
@@ -37,9 +39,9 @@ async fn test_set_metadata() -> Result<(), Box<dyn std::error::Error>> {
 
     let outcome = user_account
         .call(contract.id(), "ft_metadata")
-        .transact()
+        .view()
         .await?;
-    assert!(outcome.is_success());
+    //assert!(outcome.is_success());
     println!("metadata: {:#?}", outcome);
 
     let outcome = user_account
@@ -62,10 +64,10 @@ async fn test_set_metadata() -> Result<(), Box<dyn std::error::Error>> {
 
     let outcome = user_account
         .call(contract.id(), "ft_metadata")
-        .transact()
+        .view()
         .await?;
-    assert!(outcome.is_success());
-    println!("metadata: {:#?}", outcome);
+    //assert!(outcome.is_success());
+    println!("metadata: {:#?}", outcome.json::<FungibleTokenMetadata>()?.name);
 
     //let user_message_outcome = contract.view("get_greeting").args_json(json!({})).await?;
     //assert_eq!(user_message_outcome.json::<String>()?, "Hello World!");
